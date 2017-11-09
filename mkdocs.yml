@@ -1,0 +1,7 @@
+site_name: PREST GARA Introduction to molecular simulation techniques
+site_author: David De Sancho
+theme : readthedocs
+pages :
+        - ['index.md', 'Index']
+        - ['mc.md', 'Monte Carlo']
+        - ['md_protein.md', 'Molecular dynamics']
