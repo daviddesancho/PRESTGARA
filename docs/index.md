@@ -45,6 +45,11 @@ install Gromacs on Windows. You can find instructions
 [here](http://www.gromacs.org/Documentation/Installation_Instructions_5.0#Building_on_Windows). 
 
 4. **VMD** :
-	+ The last thing we will need is some visualization software for watching
+	+ We will need is some visualization software for watching
 our molecules wiggle and jiggle. You can download the code and follow the installation
 instructions from [this](http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) website.
+
+5. **ImageMagick***:
+	+ Finally, for some visualization of the properties of the Ising model we will need 
+the ImageMagik software which you will be able to install following the instructions in this 
+[link](https://www.imagemagick.org/script/index.php).
