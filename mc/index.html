@@ -53,6 +53,9 @@
                 
                     <ul>
                     
+                        <li class="toctree-l3"><a href="#monte-carlo-simulation-of-an-ising-model">Monte Carlo simulation of an Ising model</a></li>
+                        
+                    
                     </ul>
                 
             </li>
@@ -97,7 +100,23 @@
 </div>
           <div role="main">
             <div class="section">
-              
+              <h1 id="monte-carlo-simulation-of-an-ising-model">Monte Carlo simulation of an Ising model</h1>
+<p>The <a href="https://en.wikipedia.org/wiki/Ising_model">Ising model</a> is very useful as a model for
+ magnetization that will allow for exploring the Monte Carlo method. In the Ising model
+we consider a two-dimensional lattice of particles, each of which has only two possible 
+spins, "up" and "down". In our particular example we will consider that interactions 
+are limited to nearest neighbours. A parallel pair results in a lower energy than an
+antiparallel pair. Ideally, we would also consider the effect of an external field on the
+results, but today we will focus on the effects of the temperature only.</p>
+<p>For this exercise we use the code developed by Frans Pretorius and William East (Princeton 
+University). The first thing we need to do is download two pieces of Python code: 
+<a href="https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising_MHMC.py"><code>ising_MHMC.py</code></a> 
+and <a href="https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py"><code>ising.py</code></a>.</p>
+<pre><code>mkdocs.yml    # The configuration file.
+docs/
+    index.md  # The documentation homepage.
+    ...       # Other markdown pages, images and other files.
+</code></pre>
             </div>
           </div>
           <footer>
@@ -140,7 +159,7 @@
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-09 10:44:14.599077
+Docs Build Date : 2017-11-10 14:43:08.578387
 -->
 </body>
 </html>

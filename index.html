@@ -49,7 +49,7 @@
                         
                             <li><a class="toctree-l4" href="#syllabus">Syllabus</a></li>
                         
-                            <li><a class="toctree-l4" href="#project-layout">Project layout</a></li>
+                            <li><a class="toctree-l4" href="#setting-yourself-up">Setting yourself up</a></li>
                         
                     
                     </ul>
@@ -105,20 +105,67 @@
           <div role="main">
             <div class="section">
               <h1 id="introduction-to-molecular-simulation-techniques">Introduction to molecular simulation techniques</h1>
-<p><a href="https://sites.google.com/view/daviddesanchoresearch/home">David De Sancho</a> (ddesancho@nanogune.eu)<br />
-Ikerbasque Fellow, CIC nanoGUNE (Donostia-San Sebastián)</p>
-<p>For full documentation visit <a href="http://mkdocs.org">mkdocs.org</a>.</p>
-<h2 id="syllabus">Syllabus</h2>
+<p><a href="https://sites.google.com/view/daviddesanchoresearch/home"><strong>David De Sancho</strong></a> (ddesancho@nanogune.eu)<br />
+<a href="http://www.ikerbasque.net/">Ikerbasque Fellow</a>, <a href="http://www.nanogune.eu/">CIC nanoGUNE</a> (Donostia-San Sebastián)</p>
+<p>In this tutorial we will explore some of the concepts that we have covered 
+about molecular simulation methods. The practical is intended to serve
+as an example of how Monte Carlo (MD) and Molecular Dynamics (MD) simulation 
+work practically and how they can provide scientific insight at a fundamental
+level in the context of the nanosciences.</p>
+<h3 id="syllabus">Syllabus</h3>
+<ol>
+<li>MC simulation of magnetization in an Ising model</li>
+<li>MD simulations of a biomolecule stretching</li>
+</ol>
+<h3 id="setting-yourself-up">Setting yourself up</h3>
+<p>Before the action starts we need to install some software in our computer, 
+which we will need for running the calculations. Please follow the instructions
+below.</p>
+<ol>
+<li>
+<p><strong>The terminal</strong> : </p>
 <ul>
-<li>Monte Carlo simulation of an Ising model</li>
-<li>Molecular dynamics (MD) simulations of a biomolecule</li>
+<li><em>Mac:</em> Although Macs bring a native Terminal app, I recommend using 
+iTerm2, which I find more comfortable to use. Follow <a href="https://www.iterm2.com/">this link</a>,
+ download and proceed as indicated in the installation instructions.</li>
+<li><em>Windows:</em> Here my advice would be to install <a href="https://git-for-windows.github.io/">git</a>,
+ which comes with the phenomenal Git BASH terminal. Download and find the executable
+file.</li>
 </ul>
-<h2 id="project-layout">Project layout</h2>
-<pre><code>mkdocs.yml    # The configuration file.
-docs/
-    index.md  # The documentation homepage.
-    ...       # Other markdown pages, images and other files.
-</code></pre>
+</li>
+<li>
+<p><strong>Anaconda</strong> : </p>
+<ul>
+<li>For our first practical we will need a working installation of
+Python 2.7. Although macOS and Linux should bring it natively, there are distributions
+like Anaconda that bring most of the packages you should need. Go to the Anaconda 
+<a href="https://www.anaconda.com/download/">downloads page</a> and install the Python 2.7 version
+ following instructions.</li>
+</ul>
+</li>
+<li>
+<p><strong>Gromacs</strong> :</p>
+<ul>
+<li><em>Linux:</em> Installation instructions can be found in the 
+<a href="http://manual.gromacs.org/documentation/5.1.4/install-guide/index.html">Gromacs documentation website</a>.</li>
+<li><em>Mac</em>: We first need to go to the Gromacs <a href="http://www.gromacs.org/Downloads">downloads page</a> 
+and download the source code for version 5.1.4. You can find some instructions to install the software 
+<a href="http://daviddesancho.github.io/ResDocs/Gromacs/installation/">here</a>. We will not need mpi support 
+for our practical so you can stick to the simple installation.</li>
+<li><em>Windows:</em> I have never tried this but I read that it is possible to 
+install Gromacs on Windows. You can find instructions 
+<a href="http://www.gromacs.org/Documentation/Installation_Instructions_5.0#Building_on_Windows">here</a>. </li>
+</ul>
+</li>
+<li>
+<p><strong>VMD</strong> :</p>
+<ul>
+<li>The last thing we will need is some visualization software for watching
+our molecules wiggle and jiggle. You can download the code and follow the installation
+instructions from <a href="http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD">this</a> website.</li>
+</ul>
+</li>
+</ol>
             </div>
           </div>
           <footer>
@@ -159,7 +206,7 @@ docs/
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-09 10:44:14.533005
+Docs Build Date : 2017-11-10 14:43:08.520846
 -->
 </body>
 </html>
