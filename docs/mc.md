@@ -1,36 +1,40 @@
 # Monte Carlo simulation of an Ising model
 
-The [Ising model](https://en.wikipedia.org/wiki/Ising_model) is very useful as a model for
- magnetization that will allow for exploring the Monte Carlo method. In the Ising model
-we consider a two-dimensional lattice of particles, each of which has only two possible 
-spins, "up" and "down". In our particular example we will consider that interactions 
-are limited to nearest neighbours. A parallel pair results in a lower energy than an
-antiparallel pair. Ideally, we would also consider the effect of an external field on the
-results, but today we will focus on the effects of the temperature only.
+The [Ising model](https://en.wikipedia.org/wiki/Ising_model) is very useful as a 
+model for magnetization that will allow for exploring the Monte Carlo method. In 
+the Ising model we consider a two-dimensional lattice of particles, each of which
+ has only two possible spins, "up" and "down". In our particular example we will 
+consider that interactions are limited to nearest neighbours. A parallel pair 
+results in a lower energy than an antiparallel pair. Ideally, we would also
+ consider the effect of an external field on the results, but today we will focus
+ on the effects of the temperature only.
 
-For this exercise we use the code developed by Frans Pretorius and William East (Princeton 
-University). The first thing we need to do is download two pieces of Python code: 
+For this exercise we use the code developed by Frans Pretorius and William 
+East (Princeton 
+University). The first thing we need to do is download two pieces of Python 
+code: 
 [```ising_MHMC.py```](https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising_MHMC.py) 
 and [```ising.py```](https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py).
 
 ### Moving around
 
 In order to start getting some intuition on we will start working on a 
-[jupyter-notebook](http://jupyter.org/). Assuming that the ```jupyter``` package is 
-properly installed in your anaconda Python distribution of your machine, you just have
- to open your terminal and move to the directory where your files are located. The 
-files you downloaded are probably in the ```Downloads``` folder of your machine, so in 
-your terminal type the following:
+[jupyter-notebook](http://jupyter.org/). Assuming that the ```jupyter``` 
+package is properly installed in your anaconda Python distribution of 
+your machine, you just have  to open your terminal and move to the directory
+ where your files are located. The files you downloaded are probably in the 
+```Downloads``` folder of your machine, so in your terminal type the following:
 
 	$> mkdir Ising
 	$> mv ~/Downloads/ising.py Ising  
 	$> jupyter-notebook ising.py
 
 ### Generating an Ising model
-In a text editor we will open the ```ising.py``` file itself. The Python code we are using
-contains a class (called ```Ising_lattice```) that allows generating 2D Ising models of size NxN.
- Although you do not need to understand everything in this file it is useful to go through
- some bits of code.
+In a text editor we will open the ```ising.py``` file itself. The Python code
+ we are using contains a class (called ```Ising_lattice```) that allows 
+generating 2D Ising models of size NxN. Although you do not need to understand 
+everything in this file it is useful to go through some bits of code. For example,
+look at the following snippet:
 
 	def __init__(self,N,J=1.0,H=0.0):
 	   self._N=N
@@ -40,27 +44,31 @@ contains a class (called ```Ising_lattice```) that allows generating 2D Ising mo
 	   self.random_spins()
 	   self._compute_E_M()
 
-This is the method that initializes instances of the ```Ising_lattice``` class, which 
-needs to know the size of the lattice (```N```),  the strength of the interactions 
-(```J```) and the external magnetization (```H```). Also, we are initializing 
-the lattice by randomizing the spin directions (using the method ```random_spins()```) and
- computing the energies and magnetization (```_comput_E_M()```).
+What you read above is called a "method", a part of a class which in this case
+initializes an instance of the ```Ising_lattice``` class. The information it 
+needs to get from the user is the size of the lattice (```N```),  the strength
+ of the interactions (```J```) and the external magnetization (```H```). Also,
+ we are initializing the lattice by randomizing the spin directions (using the
+ method ```random_spins()```) and computing the energies and magnetization 
+(```_compute_E_M()```).
 
-Let's then initialize an instance of this class in our jupyter-notebook. First, in a cell
-we will first import a number of packages writing and executing the following lines 
+Let's then initialize an instance of this class in our jupyter-notebook. 
+First, we will first import a number of packages writing and executing the 
+following lines in a cell
 
 	import numpy as np
 	import ising as I
 	import matplotlib.pyplot as plt
 	%matplotlib inline
 
-To run this cell we need to either click ```Shift+Enter``` or use the Play button. Then
-we can generate an instance of the class of *N=*5.
+To run a cell we just need to either click ```Shift+Enter``` or use the Play
+ button on the top bar. Next, we can generate an instance of the class with
+size *N=*5.
 
 	a = I.Ising_lattice(5)
 
-This generates a 5x5 lattice with randomized spins. To get a simple visualization of this
-you can use another method written in the class.
+This generates a 5x5 lattice with randomized spins. To get a simple 
+visualization of this you can use another method written in the class.
 
 	a.diagram()
 
@@ -87,22 +95,23 @@ And you will get an output corresponding to the flipped spin
 	 ['@' ' ' ' ' ' ' '@']
 	 ['@' '@' ' ' '@' ' ']]
 
-So far we know how to generate an Ising lattice, flip its spins and recover its energy 
-and magnetization. But this specific configuration would in principle be as representative
-of the magnet as any other configuration. In order to get a more faithful representation of 
-the system that allows calculating average properties we need to sample from the ensemble
+So far we know how to generate an Ising lattice, flip its spins and recover
+ its energy and magnetization. But this specific configuration would in 
+principle be as representative of the magnet as any other configuration. 
+In order to get a more faithful representation of the system that allows 
+calculating average properties we need to sample from the ensemble
 of possible configurations. This is done using the Monte Carlo method.
 
 ### The MC algorithm
-We will run our MC algorithm in the Jupyter notebook. First we will define the 
-size of the lattice and generate the initial configuration, which in this case 
-will be of size 8x8.  
+We will run our MC algorithm in the Jupyter notebook. First we will define 
+the size of the lattice and generate the initial configuration. Again, in
+ this case will be of size 5x5.  
 
 	N = 5
 	a = I.Ising_lattice(N)
 
-Next we will define the MC loop, which in this case will do 1000 iterations trying
-to sample from the ensemble of possibilities 
+Next we will define the MC loop, which in this case will do 1000 iterations 
+trying to sample from the ensemble of possibilities 
 
 	nflips = 1000
 	n = 0
@@ -114,7 +123,19 @@ to sample from the ensemble of possibilities
 	   magnet.append(a._M)
 	   n+=1
 
-Here we are doing random flips in our lattice in positions ```i``` and
-```j``` and accepting them depending on the Metropolis criterion. The
-flipping, the calculation of the energy and the acceptance or rejection
-are encoded in the ```Ising_lattice``` class.
+Clearly, in each MC iteration we are attempting a random flip in our lattice. 
+The change is done in positions ```i``` and ```j``` and acceptance or rejection
+ of the move depends on the Metropolis criterion. The flipping, the calculation 
+of the energy and the acceptance or rejection are encoded in the 
+```Ising_lattice``` class. Maybe the latter part (i.e. the Metropolis rule)
+is encoded in the following line:
+
+	 if (dE < 0.0 or (T>0.0 and (np.random.random()<np.exp(-dE/T)))):
+
+Which is saying that the move should be accepted if the change in the energy is
+favourable, or if it is unfavourable but still permisible given the available
+thermal energy.
+
+### Exploring thermal effects in the algorithm
+To finalize with our exploration of the Ising model we are going to explore what
+the thermal effects are in our magnet. For that we will generate a 

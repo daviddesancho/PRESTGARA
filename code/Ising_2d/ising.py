@@ -152,24 +152,27 @@ class Ising_lattice:
    # Manipulation methods
     
    def spin_flip(self,i,j): 
-      N=self._N
-      s=self._spins
-      dM=-2.0*s[i%N,j%N]
-      dE=2.0*s[i%N,j%N]*self._H
+      N = self._N
+      s = self._spins
+      dM = -2.0*s[i%N,j%N]
+      dE = 2.0*s[i%N,j%N]*self._H
       # N==1 is a special case ... particle is it's own neighbour, so *all* 
       # spins flip, self-interaction E doesn't change
-      if (N>1):
-         dE+=2*s[i%N,j%N]*self._J*(s[i%N,(j+1)%N]+s[(i+1)%N,j%N]+s[i%N,(j-1)%N]+s[(i-1)%N,j%N])
-      self._spins[i%N,j%N]*=-1
-      self._E+=dE
-      self._M+=dM
+      if (N > 1):
+         dE += 2*s[i%N,j%N]*self._J*(s[i%N,(j+1)%N] + s[(i+1)%N,j%N] \
+                 + s[i%N,(j-1)%N] + s[(i-1)%N,j%N])
+      self._spins[i%N,j%N] *= -1
+      self._E += dE
+      self._M += dM
       return dE
     
    def cond_spin_flip(self,i,j,T): 
-      dE=self.spin_flip(i,j)
-      if (dE<0.0 or (T>0.0 and (np.random.random()<np.exp(-dE/T)))): return dE
-      self.spin_flip(i,j)
-      return 0
+      dE = self.spin_flip(i,j)
+      if (dE < 0.0 or (T>0.0 and (np.random.random()<np.exp(-dE/T)))): 
+          return dE
+      else:
+          self.spin_flip(i,j)
+          return 0
     
    # private methods
     
@@ -181,4 +184,3 @@ class Ising_lattice:
             self._E-=self._spins[i,j]*(self._spins[i,(j+1)%self._N]+self._spins[(i+1)%self._N,j])
       self._E*=self._J
       self._E-=self._M*self._H
-   #
