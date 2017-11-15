@@ -3,20 +3,21 @@
 [Ikerbasque Fellow](http://www.ikerbasque.net/), [CIC nanoGUNE](http://www.nanogune.eu/) (Donostia-San Sebastián)
 
 In this tutorial we will explore some of the concepts that we have covered 
-about molecular simulation methods. The practical is intended to serve
-as an example of how Monte Carlo (MD) and Molecular Dynamics (MD) simulation 
-work practically and how they can provide scientific insight at a fundamental
-level in the context of the nanosciences.
+during the lecture about molecular simulation methods. The examples we will
+see here will show how Monte Carlo (MC) and molecular dynamics (MD)) techniques
+can provide scientific insight at a fundamental level in the context of the
+ nanosciences.
 
 ### Syllabus
 
 1. MC simulation of magnetization in an Ising model
-2. MD simulations of a biomolecule stretching
+2. MD simulations of the stretching of a biomolecule
 
 ### Setting yourself up
 Before the action starts we need to install some software in our computer, 
 which we will need for running the calculations. Please follow the instructions
-below.
+below. Instructions are not always provided for Linux, as this OS will usually
+ take care of itself.
  
 1. **The terminal** : 
 	+ *Mac:* Although Macs bring a native Terminal app, I recommend using 
@@ -24,7 +25,7 @@ iTerm2, which I find more comfortable to use. Follow [this link](https://www.ite
  download and proceed as indicated in the installation instructions.
 	+ *Windows:* Here my advice would be to install [git](https://git-for-windows.github.io/),
  which comes with the phenomenal Git BASH terminal. Download and find the executable
-file.
+file you need for the installation.
 
 2. **Anaconda** : 
 	+ For our first practical we will need a working installation of
@@ -45,11 +46,11 @@ install Gromacs on Windows. You can find instructions
 [here](http://www.gromacs.org/Documentation/Installation_Instructions_5.0#Building_on_Windows). 
 
 4. **VMD** :
-	+ We will need is some visualization software for watching
-our molecules wiggle and jiggle. You can download the code and follow the installation
-instructions from [this](http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) website.
+	+ We will need some visualization software for watching our molecules wiggle and jiggle.
+ You can download the code and follow the installation instructions from 
+[this](http://www.ks.uiuc.edu/Development/Download/download.cgi?PackageName=VMD) website for either
+Linux, macOS or Windows.
 
-5. **ImageMagick***:
-	+ Finally, for some visualization of the properties of the Ising model we will need 
-the ImageMagik software which you will be able to install following the instructions in this 
-[link](https://www.imagemagick.org/script/index.php).
+5. **ImageMagick**:
+	+ Finally, for some image formatting we will need the ImageMagick software that you
+ will be able to install following the instructions in this [link](https://www.imagemagick.org/script/index.php).
