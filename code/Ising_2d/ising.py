@@ -24,7 +24,7 @@ from matplotlib import cm
 #   doing so, but if you do, it's at your own risk ... i.e., you
 #   could place an instance of a class in an inconsistent state.
 
-class Ising_lattice:
+class Ising_lattice(object):
    """
    Class to explore a simple nearest-neighbour 2D Ising model.
    Specifically, this contains a square, NxN periodic lattice,
@@ -145,9 +145,10 @@ class Ising_lattice:
    def plot(self,n):
       fig = plt.figure()
       ax = fig.add_subplot(111)
-      cax = ax.imshow(self._spins, interpolation='nearest',cmap=cm.coolwarm)
+      cax = ax.imshow(self._spins, interpolation='nearest',cmap=cm.coolwarm, vmin=-1,vmax=0)
       cbar = fig.colorbar(cax, ticks=[-1, 0, 1])
       fig.savefig("pngs/ising%g.png"%n)
+      plt.close()
 
    # Manipulation methods
     
