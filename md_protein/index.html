@@ -61,7 +61,9 @@
                 
                     <ul>
                     
-                        <li class="toctree-l3"><a href="#molecular-dynamics-simulations-of-a-protein">Molecular dynamics simulations of a protein</a></li>
+                        <li class="toctree-l3"><a href="#molecular-dynamics-simulations-of-protein-stretching">Molecular dynamics simulations of protein stretching</a></li>
+                        
+                            <li><a class="toctree-l4" href="#the-simulation-model">The simulation model</a></li>
                         
                     
                     </ul>
@@ -100,7 +102,26 @@
 </div>
           <div role="main">
             <div class="section">
-              <h1 id="molecular-dynamics-simulations-of-a-protein">Molecular dynamics simulations of a protein</h1>
+              <h1 id="molecular-dynamics-simulations-of-protein-stretching">Molecular dynamics simulations of protein stretching</h1>
+<p>In the second part of our tutorial we will look at another 
+application of molecular simulations to nanobiotechnology.
+In particular we will focus on trying to reproduce 
+signatures of single molecule experiments on proteins
+with the atomic force microscope (AFM) from a simple toy
+model. The protein we will look at, titin, is in fact of great
+interest in the study of protein mechanics. You can learn 
+more about this protein exploring this 
+<a href="http://pdb101.rcsb.org/motm/185">link</a>. For our calculations
+we will use an open source package for running simulatoins called
+ <a href="../www.gromacs.org">Gromacs</a>.</p>
+<h3 id="the-simulation-model">The simulation model</h3>
+<p>Instead of running a proper atomistic simulations including all the
+protein atoms and those of the sorrounding water molecules, we
+will use a coarse-grained model. In particular, we will use the 
+widely used <a href="http://smog-server.org/">SMOG force field</a>, which reduces
+the representation of the interactions to their bare bones (plus we
+forget about the water). Interestingly, the model retains important 
+details </p>
             </div>
           </div>
           <footer>
@@ -141,7 +162,7 @@
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-10 14:43:08.581266
+Docs Build Date : 2017-11-22 08:29:57.595331
 -->
 </body>
 </html>
