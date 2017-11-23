@@ -113,7 +113,8 @@
               <h1 id="monte-carlo-simulation-of-an-ising-model">Monte Carlo simulation of an Ising model</h1>
 <p>The <a href="https://en.wikipedia.org/wiki/Ising_model">Ising model</a> is very useful 
 for the study of magnetization and also for exploring some basic features of
- the Monte Carlo method. In the Ising model we consider a two-dimensional 
+ the Monte Carlo method. </p>
+<p>In the Ising model we consider a two-dimensional 
 lattice of spins, each of which has only two possible configurations, "up" and 
 "down". In our particular example we will consider that interactions are 
 limited to nearest neighbours. In the case of a ferromagnet, a parallel pair 
@@ -126,13 +127,15 @@ East (Princeton
 University). The first thing we need to do is download two pieces of Python 
 code: 
 <a href="https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising_MHMC.py"><code>ising_MHMC.py</code></a> 
-and <a href="https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py"><code>ising.py</code></a>.</p>
+and <a href="https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py"><code>ising.py</code></a>. For downloading the files, you will need to click on the "Raw"
+tab and then proceed with the download.</p>
 <h3 id="moving-around">Moving around</h3>
 <p>We will first start developing some intuition on what the code can do. 
 The files you downloaded are probably in your <code>Downloads</code> folder, so 
 in your terminal please type the following:</p>
 <pre><code>$&gt; mkdir Ising
-$&gt; mv ~/Downloads/ising.py Ising
+$&gt; cd Ising
+$&gt; mv ../Downloads/ising* .
 </code></pre>
 <p>In a text editor we will open the <code>ising.py</code> file. You can use your favourite
 text editor (a good one you will find in your macOS or Linux is called "nano").</p>
@@ -174,7 +177,8 @@ Python installation, you just have to open your terminal and move to the directo
 to create a new notebook using the <code>New</code> tab.  In your newly created 
 notebook we will first import a number of packages, for which we will need
 to writing and execute the following lines</p>
-<pre><code>import numpy as np
+<pre><code>import os
+import numpy as np
 import matplotlib.pyplot as plt
 %matplotlib inline
 import ising as I
@@ -233,9 +237,11 @@ trying to sample from the ensemble of possibilities </p>
 <pre><code>nflips = 1000
 n = 0
 temp = 0
+energy = []
+magnet = []
 while n &lt; nflips:
-   i = np.random.random()*N
-   j = np.random.random()*N
+   i = int(np.random.random()*N)
+   j = int(np.random.random()*N)
    a.cond_spin_flip(i,j,temp);
    energy.append(a._E)
    magnet.append(a._M)
@@ -278,8 +284,8 @@ n = 0
 k = 0
 nflips = 10000
 while n &lt; nflips:
-    i = np.random.random()*N
-    j = np.random.random()*N
+    i = int(np.random.random()*N)
+    j = int(np.random.random()*N)
     a.cond_spin_flip(i,j,temp)
 
     if n % 1000 == 0:
@@ -347,7 +353,7 @@ of why there is such thing as a <a href="https://en.wikipedia.org/wiki/Curie_tem
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-22 14:14:06.381873
+Docs Build Date : 2017-11-23 09:44:17.854862
 -->
 </body>
 </html>
