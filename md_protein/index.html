@@ -140,7 +140,7 @@ tab and click on <code>PDB format</code>.
 Looking at the file is less revealing than visualizing the structure.
 This is something we can do running the VMD program. In your terminal
 type the following command</p>
-<pre><code>$&gt; vmd 3B43.pdb
+<pre><code>$&gt; vmd 3b43.pdb
 </code></pre>
 <p>This should open the file in a new VMD session, which will allow you
 to look at the protein in multiple ways and to generate nice images.</p>
@@ -150,8 +150,8 @@ files we will need to run our simulation. They are stored in the Git
 repository for this class. The first file we will look at is the <code>gro</code> 
 file, which is very similar to the PDB file. Run the following command in
 your terminal </p>
-<pre><code>$&gt; wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.gro
-$&gt; nano titin.14879.pdb.gro
+<pre><code>$&gt; wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6_longbox.gro
+$&gt; nano titin_longbox.gro
 </code></pre>
 <p>As you can see, the file contains cartesian coordinates for lots of different
 atoms. If you move to the end of the directory you will find three numbers.
@@ -161,7 +161,7 @@ simulations.</p>
 contains all the details of your molecular interactions. You can download
 it in the same way. In your terminal, type</p>
 <pre><code>$&gt; wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.top
-$&gt; nano titin.14879.pdb.top
+$&gt; nano titin6.top
 </code></pre>
 <p>There are lots of interesting things to see here. The file is divided in 
 different sections, where we define the different types of atoms and the
@@ -189,15 +189,20 @@ defined as a periodic function for groups of 4  atoms. </p>
 </code></pre>
 <p>The type of function used here is a Fourier series. We will just finalize
 mentioning that the non-bonded interactions here are defined in the <code>[ pairs ]</code>
-section. This include the numerators for the 6 and 12 terms in a Lennard-Jones
-potential.</p>
-<p>All of these interaction terms are defined in great lenghts in the <a href="http://manual.gromacs.org/documentation/">Gromacs
+section. These are defined providing the numerators for the 6 and 12 terms in a Lennard-Jones
+potential.
+All of these interaction terms are defined in great lenghts in the <a href="http://manual.gromacs.org/documentation/">Gromacs
 manual</a>. </p>
+<p>Another file we will need to download is the index (or <code>ndx</code> file). Since
+we are pulling from the protein ends in our simulation, we need to tell the program
+the indexes of the atoms we will pull from.</p>
 <h3 id="parameters-for-the-simulation">Parameters for the simulation</h3>
 <p>Of course, so far we just have a static protein structure and all the required
  parameters for the interactions. To run dynamics, we must tell the program many 
 details on how the simulation must be run. These parameters are specified in the 
 <code>mdp</code> file.</p>
+<pre><code>$&gt; wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.ndx
+</code></pre>
 <h3 id="setting-up-your-run">Setting up your run</h3>
 <p>Usually, preparing a simulation in Gromacs requires <a href="http://www.gromacs.org/Documentation/How-tos/Steps_to_Perform_a_Simulation">multiple 
 steps</a>,
@@ -206,11 +211,12 @@ water box and the convergence to a set of pre-defined set of conditions (pressur
 and temperature) at which we want to study our system. In our simple coarse grained 
 model things are much simplified. First we will prepare our Gromacs "run input file"
 using the following command</p>
-<pre><code>$&gt; gro="smog/titin6_longbox.gro"
-$&gt; top="smog/titin6.top"
+<pre><code>$&gt; gro="titin6_longbox.gro"
+$&gt; top="titin6.top"
+$&gt; ndx="titin6.ndx"
 $&gt; mdp="pull.mdp"
 $&gt; tpr="pull.tpr"
-$&gt; gmx grompp -c $gro -f $mdp -p $top -o $tpr
+$&gt; gmx grompp -c $gro -f $mdp -p $top -o $tpr -n $ndx -maxwarn 1
 </code></pre>
 <p>This should produce a new <code>pull.tpr</code> file in your directory. Using this <code>tpr</code> file
 as input, we can now run our MD simulation.</p>
@@ -219,7 +225,11 @@ as input, we can now run our MD simulation.</p>
 <p>We will first look at the results using VMD. Again, open a new session from the terminal</p>
 <pre><code>$&gt; vmd smog/titin6_longbox.gro
 </code></pre>
-<p>And now load your trajectory onto the initial structure. What do you see in the simulation?</p>
+<p>And now load your trajectory onto the initial structure. For this you will have to type</p>
+<pre><code>vmd $&gt; mol addfile pull.xtc waitfor all
+</code></pre>
+<p>in your VMD session prompt.
+What do you see in the simulation?</p>
             </div>
           </div>
           <footer>
@@ -260,7 +270,7 @@ as input, we can now run our MD simulation.</p>
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-23 09:44:17.866184
+Docs Build Date : 2017-11-23 11:34:48.900309
 -->
 </body>
 </html>
