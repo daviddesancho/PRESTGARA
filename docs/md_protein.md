@@ -33,7 +33,7 @@ Looking at the file is less revealing than visualizing the structure.
 This is something we can do running the VMD program. In your terminal
 type the following command
 
-	$> vmd 3B43.pdb
+	$> vmd 3b43.pdb
 
 This should open the file in a new VMD session, which will allow you
 to look at the protein in multiple ways and to generate nice images.
@@ -45,8 +45,8 @@ repository for this class. The first file we will look at is the ```gro```
 file, which is very similar to the PDB file. Run the following command in
 your terminal 
 
-	$> wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.gro
-	$> nano titin.14879.pdb.gro
+	$> wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6_longbox.gro
+	$> nano titin_longbox.gro
 
 As you can see, the file contains cartesian coordinates for lots of different
 atoms. If you move to the end of the directory you will find three numbers.
@@ -58,7 +58,7 @@ contains all the details of your molecular interactions. You can download
 it in the same way. In your terminal, type
 
 	$> wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.top
-	$> nano titin.14879.pdb.top
+	$> nano titin6.top
 
 There are lots of interesting things to see here. The file is divided in 
 different sections, where we define the different types of atoms and the
@@ -88,11 +88,14 @@ defined as a periodic function for groups of 4  atoms.
 
 The type of function used here is a Fourier series. We will just finalize
 mentioning that the non-bonded interactions here are defined in the ```[ pairs ]```
-section. This include the numerators for the 6 and 12 terms in a Lennard-Jones
+section. These are defined providing the numerators for the 6 and 12 terms in a Lennard-Jones
 potential.
-
 All of these interaction terms are defined in great lenghts in the [Gromacs
 manual](http://manual.gromacs.org/documentation/). 
+
+Another file we will need to download is the index (or ```ndx``` file). Since
+we are pulling from the protein ends in our simulation, we need to tell the program
+the indexes of the atoms we will pull from.
 
 ### Parameters for the simulation
 Of course, so far we just have a static protein structure and all the required
@@ -100,6 +103,7 @@ Of course, so far we just have a static protein structure and all the required
 details on how the simulation must be run. These parameters are specified in the 
 ```mdp``` file.
 
+	$> wget https://raw.githubusercontent.com/daviddesancho/PRESTGARA/master/code/TitinPulling/smog/titin6.ndx
 
 ### Setting up your run
 Usually, preparing a simulation in Gromacs requires [multiple 
@@ -110,11 +114,12 @@ and temperature) at which we want to study our system. In our simple coarse grai
 model things are much simplified. First we will prepare our Gromacs "run input file"
 using the following command
 
-	$> gro="smog/titin6_longbox.gro"
-	$> top="smog/titin6.top"
+	$> gro="titin6_longbox.gro"
+	$> top="titin6.top"
+	$> ndx="titin6.ndx"
 	$> mdp="pull.mdp"
 	$> tpr="pull.tpr"
-	$> gmx grompp -c $gro -f $mdp -p $top -o $tpr
+	$> gmx grompp -c $gro -f $mdp -p $top -o $tpr -n $ndx -maxwarn 1
 
 This should produce a new ```pull.tpr``` file in your directory. Using this ```tpr``` file
 as input, we can now run our MD simulation.
@@ -125,4 +130,9 @@ We will first look at the results using VMD. Again, open a new session from the 
 
 	$> vmd smog/titin6_longbox.gro
 
-And now load your trajectory onto the initial structure. What do you see in the simulation?
+And now load your trajectory onto the initial structure. For this you will have to type
+
+	vmd $> mol addfile pull.xtc waitfor all
+
+in your VMD session prompt.
+What do you see in the simulation?
