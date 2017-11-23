@@ -2,7 +2,9 @@
 
 The [Ising model](https://en.wikipedia.org/wiki/Ising_model) is very useful 
 for the study of magnetization and also for exploring some basic features of
- the Monte Carlo method. In the Ising model we consider a two-dimensional 
+ the Monte Carlo method. 
+
+In the Ising model we consider a two-dimensional 
 lattice of spins, each of which has only two possible configurations, "up" and 
 "down". In our particular example we will consider that interactions are 
 limited to nearest neighbours. In the case of a ferromagnet, a parallel pair 
@@ -16,7 +18,8 @@ East (Princeton
 University). The first thing we need to do is download two pieces of Python 
 code: 
 [```ising_MHMC.py```](https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising_MHMC.py) 
-and [```ising.py```](https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py).
+and [```ising.py```](https://github.com/daviddesancho/PRESTGARA/blob/master/code/Ising_2d/ising.py). For downloading the files, you will need to click on the "Raw"
+tab and then proceed with the download.
 
 ### Moving around
 
@@ -25,7 +28,8 @@ The files you downloaded are probably in your ```Downloads``` folder, so
 in your terminal please type the following:
 
 	$> mkdir Ising
-	$> mv ~/Downloads/ising.py Ising 
+	$> cd Ising
+	$> mv ../Downloads/ising* .
 
 In a text editor we will open the ```ising.py``` file. You can use your favourite
 text editor (a good one you will find in your macOS or Linux is called "nano").
@@ -74,6 +78,7 @@ to create a new notebook using the ```New``` tab.  In your newly created
 notebook we will first import a number of packages, for which we will need
 to writing and execute the following lines
 
+	import os
 	import numpy as np
 	import matplotlib.pyplot as plt
 	%matplotlib inline
@@ -143,9 +148,11 @@ trying to sample from the ensemble of possibilities
 	nflips = 1000
 	n = 0
 	temp = 0
+	energy = []
+	magnet = []
 	while n < nflips:
-	   i = np.random.random()*N
-	   j = np.random.random()*N
+	   i = int(np.random.random()*N)
+	   j = int(np.random.random()*N)
 	   a.cond_spin_flip(i,j,temp);
 	   energy.append(a._E)
 	   magnet.append(a._M)
@@ -194,8 +201,8 @@ at different final temperatures. Type the following lines in a Jupyter cell
 	k = 0
 	nflips = 10000
 	while n < nflips:
-	    i = np.random.random()*N
-	    j = np.random.random()*N
+	    i = int(np.random.random()*N)
+	    j = int(np.random.random()*N)
 	    a.cond_spin_flip(i,j,temp)
 	
 	    if n % 1000 == 0:

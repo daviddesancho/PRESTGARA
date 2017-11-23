@@ -10,8 +10,8 @@ can provide scientific insight at a fundamental level in the context of the
 
 ### Syllabus
 
-1. MC simulation of magnetization in an Ising model
-2. MD simulations of the stretching of a biomolecule
+1. [MC simulation of magnetization in an Ising model](mc.md)
+2. [MD simulations of the stretching of a biomolecule](mc.md)
 
 ### Setting yourself up
 Before the action starts we need to install some software in our computer, 
