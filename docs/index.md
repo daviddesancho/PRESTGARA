@@ -4,7 +4,7 @@
 
 In this tutorial we will explore some of the concepts that we have covered 
 during the lecture about molecular simulation methods. The examples we will
-see here will show how Monte Carlo (MC) and molecular dynamics (MD)) techniques
+see here will show how Monte Carlo (MC) and molecular dynamics (MD) techniques
 can provide scientific insight at a fundamental level in the context of the
  nanosciences.
 
