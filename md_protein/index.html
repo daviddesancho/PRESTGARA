@@ -118,7 +118,7 @@ model. The protein we will look at, titin, is in fact of great
 interest in the study of protein mechanics. You can learn 
 more about this protein exploring this 
 <a href="http://pdb101.rcsb.org/motm/185">link</a>. For our calculations
-we will use an open source package for running simulatoins called
+we will use an open source package for running simulations called
  <a href="../www.gromacs.org">Gromacs</a>.</p>
 <p>Instead of running a proper atomistic simulation including physics-based
 interactions considering all the atoms of both protein and solvent, we
@@ -126,7 +126,7 @@ will use a coarse-grained model. In particular, we will choose the
 widely used <a href="http://smog-server.org/">SMOG force field</a>, which reduces
 the representation of the interactions to a design principle (that the
 protein will fold to its native state) and conveniently ignores the 
-sorrounding water. Interestingly, the model retains important 
+surrounding water. Interestingly, the model retains important 
 details of the system. </p>
 <h3 id="downloading-the-protein">Downloading the protein</h3>
 <p>First we will look at our system of interest, consisting of six 
@@ -209,8 +209,12 @@ steps</a>,
  including the minimization of the protein structure, the equilibration of the 
 water box and the convergence to a set of pre-defined set of conditions (pressure 
 and temperature) at which we want to study our system. In our simple coarse grained 
-model things are much simplified. First we will prepare our Gromacs "run input file"
-using the following command</p>
+model things are much simplified. </p>
+<p>The first thing we will do is to source the <code>GMXRC.bash</code> file, that allows Gromacs
+commands to be accessible in our terminal.</p>
+<pre><code>$&gt; source $GROMACS_INSTALL_LOCATION/bin/GMXRC.bash
+</code></pre>
+<p>Then we will prepare our Gromacs "run input file" using the following command</p>
 <pre><code>$&gt; gro="titin6_longbox.gro"
 $&gt; top="titin6.top"
 $&gt; ndx="titin6.ndx"
@@ -218,8 +222,8 @@ $&gt; mdp="pull.mdp"
 $&gt; tpr="pull.tpr"
 $&gt; gmx grompp -c $gro -f $mdp -p $top -o $tpr -n $ndx -maxwarn 1
 </code></pre>
-<p>This should produce a new <code>pull.tpr</code> file in your directory. Using this <code>tpr</code> file
-as input, we can now run our MD simulation.</p>
+<p>This should produce a new <code>pull.tpr</code> file in your directory. Using this
+ <code>tpr</code> file as input, we can now run our MD simulation.</p>
 <pre><code>$&gt; gmx mdrun -v -s pull.tpr -deffnm pull -nt 1 -pf pullf -px pullx
 </code></pre>
 <p>We will first look at the results using VMD. Again, open a new session from the terminal</p>
@@ -228,8 +232,13 @@ as input, we can now run our MD simulation.</p>
 <p>And now load your trajectory onto the initial structure. For this you will have to type</p>
 <pre><code>vmd $&gt; mol addfile pull.xtc waitfor all
 </code></pre>
-<p>in your VMD session prompt.
-What do you see in the simulation?</p>
+<p>in your VMD session prompt. Chances are that what you see will make you feel
+dizzy, as the protein seems to be going across the simulation box. In fact, that
+is precisely what you are seen. In order to produce a trajectory without this
+effect we can use a Gromacs tool for making transformations on trajectories</p>
+<pre><code>$&gt; gmx trajconv -s $tpr -f $out -pbc nojump
+</code></pre>
+<p>You can now run the resulting <code>trajout.xtc</code> file. What do you see in the simulation?</p>
             </div>
           </div>
           <footer>
@@ -270,7 +279,7 @@ What do you see in the simulation?</p>
 
 <!--
 MkDocs version  : 0.12.2
-Docs Build Date : 2017-11-23 11:34:48.900309
+Docs Build Date : 2017-11-28 10:40:55.585614
 -->
 </body>
 </html>
